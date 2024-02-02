@@ -24,3 +24,6 @@ FROM scratch
 COPY --from=builder /app /app
 CMD ["/app"]
 ```
+
+
+Link da imagem docker: https://hub.docker.com/repository/docker/gustavosernamoraes/fullcycle
