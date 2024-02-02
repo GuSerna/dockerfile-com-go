@@ -1,0 +1,26 @@
+# imagem minima com Go
+
+## Desafio Full Cycle
+A ideia era fazr uma imagem que imprimisse apenas um 'Full Cycle Rocks' usando como base a linguagem Go, o problema era que essa imagem deveria ter apenas 2mb sendo que quando usamos a imagem go normal do docker hub temos uma imagem de 222mg aproximadamente.
+Depois de pesquisar um pouco descobri a imagem srach que se encaixa perfeitamente no que eu precisava e usando  conceito de multi-stage builds consegui chegar no resultado esperado.
+
+## Como foi feito
+### Construção do builder:
+Na primeira linha optei por usar a tag alpine do golang mas seria possivel obter o mesmo resultado utilizando a latest.
+
+```FROM golang:alpine as builder
+WORKDIR /go/src/app
+COPY . .
+RUN CGO_ENABLED=0 go build -o /app main.go```
+
+Usei o comando RUN CGO_ENABLED=0 para dizer ao meu compilador Go para que ele desative as dependencias externas, ou seja estamos dizendo para o compilador Go para criar um executável independente com todas as dependências incorporadas. Isso é util em ambientes de contêineres, pois resulta em executáveis autocontidos que podem ser executados em diversos ambientes sem a necessidade de instalar dependências externas.
+
+### Construção da Runtime
+
+A ideia era usar uma imagem mínima (scratch), isso é feito para garantir que o contêiner resultante seja o menor possível, contendo apenas o binário do aplicativo resultando assim em uma imagem ridiculamente pequena.
+
+```
+FROM scratch
+COPY --from=builder /app /app
+CMD ["/app"]
+```
