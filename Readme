@@ -1,8 +1,8 @@
 # imagem minima com Go
 
 ## Desafio Full Cycle
-A ideia era fazr uma imagem que imprimisse apenas um 'Full Cycle Rocks' usando como base a linguagem Go, o problema era que essa imagem deveria ter apenas 2mb sendo que quando usamos a imagem go normal do docker hub temos uma imagem de 222mb aproximadamente.
-Depois de pesquisar um pouco descobri a imagem srach que se encaixa perfeitamente no que eu precisava e usando  conceito de multi-stage builds consegui chegar no resultado esperado.
+A ideia era fazer uma imagem que imprimisse apenas um 'Full Cycle Rocks' usando como base a linguagem Go, o problema era que essa imagem deveria ter apenas 2mb sendo que quando usamos a imagem go normal do docker hub temos uma imagem de 222mb aproximadamente.
+Depois de pesquisar um pouco descobri a imagem srach que se encaixa perfeitamente no que eu precisava e usando conceito de multi-stage builds consegui chegar no resultado esperado.
 
 ## Como foi feito
 ### Construção do builder:
